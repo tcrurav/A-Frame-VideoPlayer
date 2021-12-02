@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+  <script src="js/play_video.js"></script>
+  <script src="js/draw_canvas.js"></script>
+  <script src="js/draw_canvas_arrow.js"></script>
+  <script src="js/show_video_and_buttons.js"></script>
+  <script src="js/hide_video_and_buttons.js"></script>
+</head>
+
+<body>
+  <a-scene>
+
+    <a-assets>
+      <video id="video-agriculture" src="video/farming_history.mp4" preload="auto" loop="true"></video>
+      <img id="img-360-camel-house" src="img/camel_house.jpg" alt="camel house">
+      <img id="img-button-play" src="img/play.png" alt="play">
+      <img id="img-button-pause" src="img/pause.png" alt="play">
+      <img id="img-button-video" src="img/video.png" alt="video">
+      <img id="img-button-hide" src="img/hide.png" alt="hide">
+      <canvas id="canvas-video" width="100" height="100"></canvas>
+
+      <img id="img-red-arrow" src="img/red_arrow.png" alt="arrow">
+      <img id="img-strong-red-arrow" src="img/strong_red_arrow.png" alt="arrow">
+      <canvas id="canvas-arrow" width="100" height="100"></canvas>
+    </a-assets>
+
+    <a-entity id="rig" rotation="0 45 0">
+      <a-camera>
+        <a-cursor raycaster="objects: .clickable" fuse="true" fuse-timeout="1000"></a-cursor>
+      </a-camera>
+    </a-entity>
+
+    <a-entity id="video-with-buttons" position="-2 1.6 -1" rotation="0 45 0">
+      <a-plane id="plane-canvas-video" class="clickable" material="src: #canvas-video; transparent: true" width=".4"
+        height=".4" draw-canvas="canvas: #canvas-video; image: #img-button-video" show-video-and-buttons
+        animation="property: position; to: 0 0.2 0; dur: 2000; easing: linear; loop: true; dir: alternate">
+      </a-plane>
+
+      <a-video id="my-video-agriculture" material="src: #video-agriculture" scale="2 1.5" visible="false">
+      </a-video>
+
+      <a-circle id="button-hide" class="clickable" position="1.15 0.6 0" radius="0.1" material="src: #img-button-hide"
+        visible="false" hide-video-and-buttons></a-circle>
+
+      <a-circle id="button-play-pause" class="clickable" position="1.15 0.35 0" radius="0.1"
+        material="src: #img-button-pause" visible="false" play-video="video: #video-agriculture"></a-circle>
+
+    </a-entity>
+
+    <a-plane id="plane-canvas-arrow" class="clickable" material="src: #canvas-arrow; transparent: true" width=".8"
+      height=".8" position="-.5 1 -2" rotation="45 0 0"
+      draw-canvas-arrow="image: #img-red-arrow; imageStrong: #img-strong-red-arrow; canvas: #canvas-arrow">
+    </a-plane>
+
+    <!-- <a-plane id="plane-canvas-arrow" class="clickable" material="src: #canvas-arrow; transparent: true" width=".4"
+      height=".4" position="0 1 -2" draw-canvas-arrow="image: #img-arrow; canvas: #canvas-arrow">
+    </a-plane>
+
+    <a-plane id="plane-canvas-arrow" class="clickable" material="src: #canvas-arrow; transparent: true" width=".4"
+      height=".4" position="-.5 1 -2" rotation="45 0 90" scale="3 3" draw-canvas-arrow="image: #img-arrow; canvas: #canvas-arrow">
+    </a-plane> -->
+
+    <a-sky src="#img-360-camel-house"></a-sky>
+  </a-scene>
+</body>
+
+</html>
